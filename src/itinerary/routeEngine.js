@@ -1,6 +1,10 @@
 const DURATION_WEIGHTS = {
     viewpoint: 1,
+    nature: 1,
     food: 2,
+    museum: 2,
+    entertainment: 2,
+    nightlife: 2,
     shopping: 3,
 };
 
@@ -9,11 +13,11 @@ function assignTimeByCategory(places, totalHours) {
     let totalWeight = 0;
 
     places.forEach(place => {
-        totalWeight += DURATION_WEIGHTS[place.category];
+        totalWeight += DURATION_WEIGHTS[place.category] ?? 1;
     });
 
     places.forEach(place => {
-        place.durationMinutes = Math.round((DURATION_WEIGHTS[place.category] / totalWeight) * totalMinutes);
+        place.durationMinutes = Math.round(((DURATION_WEIGHTS[place.category] ?? 1) / totalWeight) * totalMinutes);
     });
 
     return places;
@@ -47,7 +51,7 @@ function orderByProximity(startLocation, places) {
     return ordered;
 }
 
-function generateItinerary(chatbotResponse) {
+export function generateItinerary(chatbotResponse) {
     const { totalHours, startLocation, places } = chatbotResponse;
 
     const placesWithTime = assignTimeByCategory(places, totalHours);
@@ -63,5 +67,3 @@ function generateItinerary(chatbotResponse) {
         itinerary: orderedPlaces
     };
 }
-
-module.exports = { generateItinerary };

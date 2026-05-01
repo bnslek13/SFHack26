@@ -201,6 +201,85 @@
 }
 
 
+/* Itinerary */
+.itinerary {
+  width: 60%;
+  max-width: 800px;
+  margin-top: 24px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 24px 28px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.itinerary-loading {
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.itinerary-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 16px;
+}
+
+.itinerary-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.itinerary-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 14px;
+  padding: 12px 16px;
+}
+
+.itinerary-step {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: black;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.itinerary-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.itinerary-name {
+  font-size: 0.95rem;
+  color: #111;
+}
+
+.itinerary-meta {
+  font-size: 0.8rem;
+  color: #555;
+  text-transform: capitalize;
+}
+
+@media (max-width: 768px) {
+  .itinerary {
+    width: 90%;
+  }
+}
+
 /* Scrollbar (optional but nice) */
 .chat-container::-webkit-scrollbar {
  width: 6px;
