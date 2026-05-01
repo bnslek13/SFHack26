@@ -10,7 +10,7 @@ function App() {
  ]);
  const [hours, setHours] = useState(null);
  const [userInput, setUserInput] = useState("");
- const [itineraryGenerated, setItineraryGenerated] = useState(0);
+ const [placesData, setPlacesData] = useState(null);
  const [step, setStep] = useState('hours');
 
 
@@ -35,14 +35,14 @@ function App() {
      setUserInput(currentInput);
      addMessage("Generating your itinerary...", "bot");
      try {
-       await fetch('/api/recommend-places', {
+       const res = await fetch('/api/recommend-places', {
          method: 'POST',
-         headers: {
-           'Content-Type': 'application/json',
-         },
+         headers: { 'Content-Type': 'application/json' },
          body: JSON.stringify({ hours, userInput: currentInput }),
        });
-       setItineraryGenerated(prev => prev + 1);
+       if (!res.ok) throw new Error('Server error');
+       const data = await res.json();
+       setPlacesData(data);
        addMessage("Here's your itinerary!", "bot");
      } catch (error) {
        console.error(error);
@@ -76,7 +76,7 @@ function App() {
        </div>
 
        {/* Itinerary */}
-       {itineraryGenerated > 0 && <Itinerary key={itineraryGenerated} />}
+       {placesData && <Itinerary data={placesData} />}
 
 
        {/* Input */}
